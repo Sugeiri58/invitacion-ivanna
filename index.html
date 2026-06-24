@@ -375,26 +375,27 @@ function animCvs(){
 animCvs();
 
 // ── SPLASH ──────────────────────────────────
-
- const audioXv = document.getElementById('musica-xv');
-const btnMusica = document.getElementById('btn-musica');
-
 function openInvitation(){
+  // 1. Ocultar Splash y mostrar contenido
   document.getElementById('splash').classList.add('hide');
   document.getElementById('wrap').classList.add('show');
   
-  // Intenta reproducir la música tras la interacción del usuario
+  // 2. Intentar reproducir la música de forma segura
+  const audioXv = document.getElementById('musica-xv');
   if (audioXv) {
     audioXv.play().catch(error => {
-      console.log("El navegador bloqueó el audio inicialmente:", error);
+      console.log("El navegador bloqueó o no encontró el audio:", error);
     });
   }
 
+  // 3. Iniciar el auto-scroll de la invitación
   setTimeout(() => startAutoScroll(), 500);
 }
 
 function toggleMusica(){
-  if (!audioXv) return;
+  const audioXv = document.getElementById('musica-xv');
+  const btnMusica = document.getElementById('btn-musica');
+  if (!audioXv || !btnMusica) return;
   
   if (audioXv.paused) {
     audioXv.play();
