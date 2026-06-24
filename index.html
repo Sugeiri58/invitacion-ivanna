@@ -159,6 +159,7 @@ section{
 </head>
 <body>
 
+<audio id="musica-xv" src="musica/cancion.mp3" loop></audio>  
 <canvas id="splat-cvs"></canvas>
 <canvas id="cvs"></canvas>
 
@@ -304,6 +305,26 @@ section{
   <p class="footer-txt rv5">Con cariño · Familia Reyes Ávila · 2026</p>
 </section>
 
+<button id="btn-musica" style="
+  position: fixed;
+  bottom: 25px;
+  left: 20px;
+  background: rgba(26, 13, 64, 0.8);
+  border: 1px solid var(--gold);
+  color: var(--gold-l);
+  border-radius: 50%;
+  width: 45px;
+  height: 45px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  z-index: 160;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
+  transition: all 0.3s ease;
+" onclick="toggleMusica()">🎵</button>
+
 </div>
 
 <script>
@@ -355,9 +376,32 @@ animCvs();
 
 // ── SPLASH ──────────────────────────────────
 function openInvitation(){
+  const audioXv = document.getElementById('musica-xv');
+const btnMusica = document.getElementById('btn-musica');
+
+function openInvitation(){
   document.getElementById('splash').classList.add('hide');
   document.getElementById('wrap').classList.add('show');
+  
+  // Intenta reproducir la música tras la interacción del usuario
+  audioXv.play().catch(error => {
+    console.log("El navegador bloqueó el audio inicialmente:", error);
+  });
+
   setTimeout(()=>startAutoScroll(),500);
+}
+
+function toggleMusica(){
+  if (audioXv.paused) {
+    audioXv.play();
+    btnMusica.textContent = '🎵';
+    btnMusica.style.boxShadow = '0 0 15px rgba(212, 175, 55, 0.6)';
+  } else {
+    audioXv.pause();
+    btnMusica.textContent = '🔇';
+    btnMusica.style.boxShadow = 'none';
+  }
+  }
 }
 
 // ── COUNTDOWN ──────────────────────────────
