@@ -376,7 +376,7 @@ animCvs();
 
 // ── SPLASH ──────────────────────────────────
 function openInvitation(){
-  const audioXv = document.getElementById('musica-xv');
+ const audioXv = document.getElementById('musica-xv');
 const btnMusica = document.getElementById('btn-musica');
 
 function openInvitation(){
@@ -384,14 +384,18 @@ function openInvitation(){
   document.getElementById('wrap').classList.add('show');
   
   // Intenta reproducir la música tras la interacción del usuario
-  audioXv.play().catch(error => {
-    console.log("El navegador bloqueó el audio inicialmente:", error);
-  });
+  if (audioXv) {
+    audioXv.play().catch(error => {
+      console.log("El navegador bloqueó el audio inicialmente:", error);
+    });
+  }
 
-  setTimeout(()=>startAutoScroll(),500);
+  setTimeout(() => startAutoScroll(), 500);
 }
 
 function toggleMusica(){
+  if (!audioXv) return;
+  
   if (audioXv.paused) {
     audioXv.play();
     btnMusica.textContent = '🎵';
@@ -401,7 +405,7 @@ function toggleMusica(){
     btnMusica.textContent = '🔇';
     btnMusica.style.boxShadow = 'none';
   }
-  }
+}
 }
 
 // ── COUNTDOWN ──────────────────────────────
