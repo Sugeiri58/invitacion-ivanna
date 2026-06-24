@@ -441,11 +441,11 @@ function startAutoScroll(){if(autoTimer)return;scheduleNext();}
 function scheduleNext(){
   const prog=document.getElementById('prog');
   prog.style.transition='none';prog.style.width='0%';
-  setTimeout(()=>{prog.style.transition='width 5000ms linear';prog.style.width='100%';},50);
+  setTimeout(()=>{prog.style.transition='width 9000ms linear';prog.style.width='100%';},50);
   autoTimer=setTimeout(()=>{
     if(!autoPaused){secs[(currentSection+1)%secs.length].scrollIntoView({behavior:'smooth',block:'start'});autoTimer=null;setTimeout(()=>scheduleNext(),600);}
     else{autoTimer=null;}
-  },5000);
+  },9000);
 }
 function pauseAuto(){
   autoPaused=true;clearTimeout(autoTimer);autoTimer=null;clearTimeout(pauseTO);
